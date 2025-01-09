@@ -22,4 +22,22 @@ Data List for Front-end Test
 - Lucide-react
 - TailwindCSS
 
+**Project Structure**
+Storemesh-Test     
+├── public/                    
+├── src/                       
+│   ├── assets/               
+│   ├── components/           
+│   │   ├── Filter.jsx        
+│   │   ├── ItemCard.jsx      
+│   │   ├── ItemList.jsx      
+│   │   ├── Navbar.jsx        
+│   │   └── Test.jsx         
+│   ├── pages/               
+│   │   └── Index.jsx       
+│   ├── routes/              
+│   │   └── Route.jsx        
+│   ├── index.css            
+│   └── main.jsx             
+
 **Thank you**
