@@ -10,6 +10,8 @@ const Index = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
 
+  const [filterOpen, setFilterOpen] = useState(false);
+
   const handleFilterChange = (newFilter) => {
     setFilter(newFilter); 
   };
@@ -18,12 +20,19 @@ const Index = () => {
     setSearchQuery(newSearchQuery);
   };
 
+  const toggleFilterOpen = (isOpen) => {
+    setFilterOpen(isOpen);
+  };
+
   return (
     <div className="min-h-screen bg-white">
-      <Navbar onSearchChange={handleSearchChange}/>
+      <Navbar onSearchChange={handleSearchChange} onFilterToggle={toggleFilterOpen}/>
       <div className="flex flex-col md:flex-row">
-        <Filter onFilterChange={handleFilterChange} /> 
-        <ItemList filter={filter} searchQuery={searchQuery} /> 
+        {/* ซ่อน Filter component หาก filterOpen เป็น false ในขนาด sm */}
+        {(filterOpen || window.innerWidth >= 768) && (
+          <Filter onFilterChange={handleFilterChange} />
+        )}
+        <ItemList filter={filter} searchQuery={searchQuery} />
       </div>
     </div>
   )

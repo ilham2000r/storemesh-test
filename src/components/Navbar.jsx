@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Grip, Search, Menu, X } from "lucide-react"
 import Logo from "../assets/Logo.png"
-const Navbar = ({ onSearchChange }) => {
+const Navbar = ({ onSearchChange, onFilterToggle }) => {
   const [accIsOpen, setAccIsOpen] = useState(false)
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -11,6 +11,7 @@ const Navbar = ({ onSearchChange }) => {
   const [searchQuery, setSearchQuery] = useState('')
 
   const [searchOpen, setSearchOpen] = useState(false)
+
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value)
@@ -24,6 +25,13 @@ const Navbar = ({ onSearchChange }) => {
   const handleClick = (menu) => {
     setSelectedMenu(menu)
   }
+
+  const toggleSearch = () => {
+    const isOpen = !searchOpen;
+    setSearchOpen(isOpen);
+    onFilterToggle(isOpen)
+    setMobileMenuOpen(false)
+  };
 
   console.log("search ",searchOpen);
   
@@ -121,17 +129,15 @@ const Navbar = ({ onSearchChange }) => {
             <span className="font-semibold text-xl">Storemesh</span>
           </div>
           <div className="flex items-center gap-4">
-            <Search 
-              className="w-5 h-5" 
-              onClick={() => {
-                setSearchOpen(!searchOpen)
-                setMobileMenuOpen(false)
-              }}
-              />
+          <Search
+              className="w-5 h-5"
+              onClick={toggleSearch} 
+            />
             <button
               onClick={() => {
                 setMobileMenuOpen(!mobileMenuOpen)
-                setSearchOpen(false)
+                setSearchOpen(false);
+                onFilterToggle(false)
               }}
               className="text-gray-600"
             >
@@ -155,7 +161,7 @@ const Navbar = ({ onSearchChange }) => {
           />
           <X
             className="absolute right-5 w-5 cursor-pointer" 
-            onClick={() => setSearchOpen(false)} 
+            onClick={toggleSearch}
           />
         </div>
         )}
